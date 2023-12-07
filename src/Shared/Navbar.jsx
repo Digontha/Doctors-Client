@@ -1,34 +1,48 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Navbar = () => {
+    const { user,logOut } = useContext(AuthContext)
+    const handleLogout=() => {
+        logOut();
+    }
     const navLinks = <>
         <NavLink
-        to="/"
+            to="/"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "bg-red-500 hover:bg-red-700 text-white rounded-xl" : "rounded-xl bg-blue-500 hover:bg-blue-700 text-white"
             }
         ><li><p>Home</p></li></NavLink>
 
-        <NavLink to="findDoctor" className={({ isActive, isPending }) =>
+        <NavLink to="/findDoctor" className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "rounded-xl bg-red-500 hover:bg-red-700 text-white" : "rounded-xl bg-blue-500 hover:bg-blue-700 text-white"
         }><li><p>Find Doctor</p></li></NavLink>
 
-        <NavLink to="makeAppointment" className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "rounded-xl bg-red-500 hover:bg-red-700 text-white" : "rounded-xl bg-blue-500 hover:bg-blue-700 text-white"
-        }><li><p>Make Appointment</p></li></NavLink>
-
-        <NavLink to="about" className={({ isActive, isPending }) =>
+        <NavLink to="/about" className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "rounded-xl bg-red-500 hover:bg-red-700 text-white" : "rounded-xl bg-blue-500 hover:bg-blue-700 text-white"
         }><li><p>About</p></li></NavLink>
 
-        <NavLink to="contact" className={({ isActive, isPending }) =>
+        <NavLink to="/contact" className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "rounded-xl bg-red-500 hover:bg-red-700 text-white" : "rounded-xl bg-blue-500 hover:bg-blue-700 text-white"
         }><li><p>Contact</p></li></NavLink>
 
-        <div>
-            <NavLink className="btn btn-neutral text-white btn-outline btn-sm lg:ml-10"><li><p>Login</p></li></NavLink>
-        </div>
+        {user ?
+            <div className="">
+                <div className="dropdown dropdown-end">
+                    <img tabIndex={0} className='w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
+                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li className='text-black'><p>{user?.displayName}</p></li>
+                        <Link to="/dashboard"> <button className="btn w-full btn-sm btn-success btn-outline  mb-3">Dashboard</button></Link>
+                        <button onClick={handleLogout} className="btn btn-sm btn-success btn-outline">Log out</button>
+                    </ul>
+                </div>
+            </div>
+            :
+            <div>
+                <NavLink to="/login" className="btn btn-neutral text-white btn-outline btn-sm lg:ml-10"><li><p>Login</p></li></NavLink>
+            </div>
+        }
     </>
     return (
         <>
