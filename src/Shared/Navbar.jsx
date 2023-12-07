@@ -32,7 +32,7 @@ const Navbar = () => {
     </>
     return (
         <>
-            <div className="navbar bg-green-800 lg:px-10 py-4">
+            <div className="navbar bg-green-800 lg:px-10 py-4 fixed z-10">
                 <div className="flex-1 gap-2">
                     <p className="text-white font-semibold font-mono  text-xl">DOCTORS</p>
                     <img className='w-10 h-10 rounded-full' src="https://th.bing.com/th/id/OIP.InaHmCjoSIANErkcdkrQ_QAAAA?rs=1&pid=ImgDetMain" alt="" />

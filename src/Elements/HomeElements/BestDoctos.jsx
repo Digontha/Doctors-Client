@@ -20,27 +20,29 @@ const BestDoctos = () => {
         <>
             <Heading heading={"Our Best"}></Heading>
             {isPending?<Loader></Loader>:
-            <Swiper
+            <div>
+                <Swiper
 
-                slidesPerView={3}
-                spaceBetween={30}
-                freeMode={true}
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[FreeMode, Pagination]}
-                className="mySwiper"
-            >
+            slidesPerView={3}
+            spaceBetween={30}
+            freeMode={true}
+            pagination={{
+                clickable: true,
+            }}
+            modules={[FreeMode, Pagination]}
+            className="mySwiper"
+        >
 
-                {
-                    AllBestDoctors?.map(doctor =>
-                        <SwiperSlide key={doctor?._id}>
-                            <AllBestDocCard doctor={doctor}></AllBestDocCard>
-                        </SwiperSlide>)
-                }
+            {
+                AllBestDoctors?.map(doctor =>
+                    <SwiperSlide key={doctor?._id}>
+                        <AllBestDocCard doctor={doctor}></AllBestDocCard>
+                    </SwiperSlide>)
+            }
 
 
-            </Swiper>}
+        </Swiper>
+        </div>}
         </>
     );
 };
